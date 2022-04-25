@@ -7,4 +7,17 @@ create table INVOICE_ITEM (inv_id int, constraint inv_id foreign key(inv_id) ref
 desc CUSTOMER;
 desc PRODUCT;
 desc INVOICE_MASTER;
-desc INVOICE_ITEM;
+desc INVOICE_ITEM; 
+insert into CUSTOMER values(101,"thoppil house","Kottayam",456768786);
+insert into CUSTOMER values(102,"mleveettyl","Pathanamthitta",755374574);
+insert into CUSTOMER values(103,"charivukalayil","Ranni",57657898);
+insert into CUSTOMER values(104,"thottakuzhi","Ranni",9048385156);
+insert into CUSTOMER values(105,"thoppil","konni",456768786);
+desc CUSTOMER;
+select * from CUSTOMER;
+insert into PRODUCT value(200,"Soap",50);
+insert into PRODUCT value(205,"Rice",500);
+insert into PRODUCT value(206,"Bag",750);
+insert into PRODUCT value(209,"Book",50);
+insert into PRODUCT value(212,"Pen",10);
+select * from PRODUCT;
