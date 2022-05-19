@@ -1,0 +1,24 @@
+use INVOICE3;
+desc customer;
+create table cust_update1(cust_id int primary key auto_increment,address varchar(30),city varchar(30),phn_no int,cust_name varchar(20));
+delimiter //
+create trigger cust_update1
+after update
+on customer for each row
+begin
+insert into cust_update1
+set cust_id=old.cust_id,address=old.address,city=old.city,phn_no=old.phn_no,cust_name=old.cust_name;
+end
+//
+delimiter ;
+select * from customer;
+update customer set address='pp house' where cust_id=105;
+select * from customer;
+select * from cust_update1;
+
+
+
+
+
+
+
