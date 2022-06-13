@@ -1,0 +1,23 @@
+use student;
+'switched to db student'
+db.createUser({user:"reportsUser",pwd: passwordPrompt(),roles: []});
+{ ok: 1 }
+db.createUser({ user: "appAdmin",pwd: passwordPrompt(),  roles:[ { role: "readWrite", db: "config" }]});
+{ ok: 1 }
+db.createUser({user: "restricted", pwd: passwordPrompt(), roles: [ { role: "readWrite", db: "reporting" } ],authenticationRestrictions: [ {clientSource: ["192.0.2.0"], serverAddress: ["198.51.100.0"]} ]});
+{ ok: 1 }
+db.dropUser("reportsUser", {w: "majority", wtimeout: 5000});
+{ ok: 1 }
+db.getUser("appAdmin");
+{
+  _id: 'student.appAdmin',
+  userId: UUID("39f85c5d-6249-47f0-aaa6-7a84cb12de0a"),
+  user: 'appAdmin',
+  db: 'student',
+  roles: [ { role: 'readWrite', db: 'config' } ],
+  mechanisms: [ 'SCRAM-SHA-1', 'SCRAM-SHA-256' ]
+}
+db.grantRolesToUser("appAdmin",[ "readWrite" , { role: "read", db: "student" } ],{ w: "majority" , wtimeout: 4000 });
+{ ok: 1 }
+db.revokeRolesFromUser( "appAdmin",[ { role: "read", db: "student" }, "readWrite" ],{ w: "majority" });
+{ ok: 1 }
